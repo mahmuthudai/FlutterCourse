@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 // ignore: must_be_immutable
 class ListViewExample extends StatelessWidget {
@@ -23,13 +24,21 @@ class ListViewExample extends StatelessWidget {
                   : Colors.purple.shade100,
               child: ListTile(
                 onTap: () {
-                  // ignore: avoid_print
-                  print('eleman tıklandı $index');
+                  if (index % 2 == 0) {
+                    EasyLoading.instance.backgroundColor = Colors.red;
+                  } else {
+                    EasyLoading.instance.backgroundColor = Colors.blue;
+                  }
+                  EasyLoading.showToast('Elemana tıklandı',
+                      duration: const Duration(seconds: 3),
+                      toastPosition: EasyLoadingToastPosition.bottom);
                 },
                 title: Text(oankiOgrenci.name),
                 subtitle: Text(oankiOgrenci.lastName),
                 leading: CircleAvatar(
-                  child: Text(oankiOgrenci.id.toString()),
+                  child: Text(
+                    oankiOgrenci.id.toString(),
+                  ),
                 ),
               ),
             );
