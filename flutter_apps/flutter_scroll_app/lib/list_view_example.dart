@@ -23,6 +23,9 @@ class ListViewExample extends StatelessWidget {
                   ? Colors.orange.shade100
                   : Colors.purple.shade100,
               child: ListTile(
+                onLongPress: () {
+                  _alertDialogExample(context, oankiOgrenci);
+                },
                 onTap: () {
                   if (index % 2 == 0) {
                     EasyLoading.instance.backgroundColor = Colors.red;
@@ -72,10 +75,47 @@ class ListViewExample extends StatelessWidget {
   }
 }
 
+void _alertDialogExample(BuildContext myContext, Ogrenci secilen) {
+  showDialog(
+      barrierDismissible: false,
+      context: myContext,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(secilen.toString()),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                Text('hüdai' * 100),
+                Text('hüdai1' * 100),
+                Text('hüdai2' * 100),
+              ],
+            ),
+          ),
+          actions: [
+            ButtonBar(
+              children: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Kapat')),
+                TextButton(onPressed: () {}, child: const Text('Tamam'))
+              ],
+            )
+          ],
+        );
+      });
+}
+
 class Ogrenci {
   final int id;
   final String name;
   final String lastName;
 
   Ogrenci(this.id, this.name, this.lastName);
+
+  @override
+  String toString() {
+    return 'İsim: $name Soyisim: $lastName Id: $id';
+  }
 }
