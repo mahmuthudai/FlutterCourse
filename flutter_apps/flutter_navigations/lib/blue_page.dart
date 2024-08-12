@@ -1,7 +1,9 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class BluePage extends StatelessWidget {
   BluePage({super.key});
 
@@ -13,7 +15,7 @@ class BluePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Blue Page'),
         backgroundColor: Colors.blue,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
       ),
       body: Center(
         child: Column(
@@ -26,10 +28,23 @@ class BluePage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 _randomNumber = Random().nextInt(100);
-                print('Üretilen sayi $_randomNumber');
+                if (kDebugMode) {
+                  print('Üretilen sayi $_randomNumber');
+                }
                 Navigator.of(context).pop(_randomNumber);
               },
               child: const Text('Geri dön'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/orangePage');
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange.shade300),
+              child: const Text(
+                style: TextStyle(color: Colors.white),
+                'Turuncu sayfaya git',
+              ),
             ),
           ],
         ),
