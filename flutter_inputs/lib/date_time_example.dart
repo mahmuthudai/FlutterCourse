@@ -13,6 +13,7 @@ class _DateTimeExampleState extends State<DateTimeExample> {
     DateTime now = DateTime.now();
     DateTime past = DateTime(now.year, now.month - 3);
     DateTime future = DateTime(now.year, now.month, now.day + 20);
+    TimeOfDay time = TimeOfDay.now();
 
     return Scaffold(
       appBar: AppBar(
@@ -25,13 +26,16 @@ class _DateTimeExampleState extends State<DateTimeExample> {
           ElevatedButton(
             onPressed: () {
               showDatePicker(
-                  context: context, firstDate: past, lastDate: future);
+                      context: context, firstDate: past, lastDate: future)
+                  .then((onValue) {});
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
             child: const Text('Tarih Seç'),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              showTimePicker(context: context, initialTime: time);
+            },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
             child: const Text('Saat Seç'),
           ),
